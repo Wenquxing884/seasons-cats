@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="黑白小猫与星空里的四季。内含音乐的离线动画，打开即用。">
+<title>四季 · 星空里的时间</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23090f13'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23d9dfa8' stroke-width='2'/%3E%3Cpath d='M32 32L45 19M32 32L22 27' stroke='%23d9dfa8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#080d11;color:#e5e9e6;font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif}body{min-height:100svh;display:grid;place-items:center;padding:32px 24px;background:radial-gradient(ellipse at 15% 0,rgba(36,65,57,.22),transparent 55%),#080d11}button,input{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer}button:disabled{opacity:.38;cursor:wait}button:focus-visible,input:focus-visible{outline:2px solid #e0e8af;outline-offset:4px}button,svg{flex-shrink:0}svg{width:21px;height:21px;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.symbols{position:absolute;width:0;height:0;overflow:hidden}.app{width:min(1120px,100%)}.heading{display:flex;align-items:end;justify-content:space-between;gap:24px;padding:0 2px 20px}.heading h1{font-size:25px;font-weight:500;letter-spacing:.12em;margin:0}.heading p{font-size:12px;letter-spacing:.12em;color:#8b9c96;margin:8px 0 0}.edition{font-size:11px;letter-spacing:.08em;color:#809089;display:flex;align-items:center;gap:8px;padding-bottom:2px}.dot{width:5px;height:5px;border-radius:50%;background:#b7c98b}.player{background:#05090b;border:1px solid #29332f;border-radius:16px;overflow:hidden;box-shadow:0 24px 90px #0005;position:relative}.screen{position:relative;width:100%;aspect-ratio:1020/576;background:#000;overflow:hidden;cursor:pointer}.scene{position:absolute;border:0;width:1020px;height:576px;transform-origin:0 0;pointer-events:none}.gate{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(transparent,#0003);transition:opacity .16s;z-index:1}.gate[hidden]{display:none}.start{width:66px;height:66px;border-radius:50%;border:1px solid #d9dfa888;background:#101b16b8;display:grid;place-items:center;backdrop-filter:blur(8px);box-shadow:0 0 32px #0004}.start:hover{background:#273b2dd9;border-color:#d9dfa8}.start svg{width:27px;height:27px;margin-left:3px;fill:#e4eac5;stroke:#e4eac5}.gate-label{font-size:12px;letter-spacing:.06em;color:#e2e7d7;background:#08100bbf;border-radius:20px;padding:7px 13px}.toolbar{padding:13px 18px 14px;background:#0b1114;border-top:1px solid #243029;flex-shrink:0}.timeline{display:block;width:100%;height:17px;margin:0 0 9px;cursor:pointer;appearance:none;-webkit-appearance:none;background:transparent;--progress:0%;touch-action:pan-y}.timeline::-webkit-slider-runnable-track{height:3px;border-radius:4px;background:linear-gradient(to right,#cfdaa4 var(--progress),#354139 var(--progress))}.timeline::-moz-range-track{height:3px;border-radius:4px;background:#354139}.timeline::-moz-range-progress{height:3px;background:#cfdaa4}.timeline::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:11px;height:11px;margin-top:-4px;background:#e2e8bd;border-radius:50%;border:0;box-shadow:0 0 0 4px #cfdaa410}.timeline::-moz-range-thumb{width:11px;height:11px;background:#e2e8bd;border:0;border-radius:50%}.controls{display:flex;align-items:center;gap:9px;min-height:34px}.icon{border:0;background:transparent;padding:8px;border-radius:8px;display:grid;place-items:center;color:#b9c4bf}.icon:hover{background:#26332a;color:#ecf0df}.play{color:#e0e8af}.play svg{fill:currentColor;stroke-width:1.2}.time{font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#a8b8ae;margin-left:3px}.time .total{color:#65786d}.spacer{flex:1}.loop{display:flex;align-items:center;gap:6px;border:1px solid transparent;background:transparent;padding:7px 9px;border-radius:8px;color:#93a69a;font-size:12px}.loop svg{width:17px;height:17px}.loop[aria-pressed=true]{background:#28351f;border-color:#647345;color:#d9e2af}.volume{width:68px;height:4px;margin:0 5px 0 -5px;accent-color:#c7d3a1;cursor:pointer}.notes{display:flex;justify-content:space-between;gap:20px;padding:15px 3px 0;color:#677b70;font-size:11px;line-height:1.7}.notice{color:#aab99b}.player:fullscreen{width:100vw;height:100dvh;display:flex;flex-direction:column;border:0;border-radius:0;background:#000;box-shadow:none}.player:fullscreen .screen{flex:1;min-height:0;aspect-ratio:auto}.player:fullscreen .toolbar{padding-left:clamp(18px,5vw,80px);padding-right:clamp(18px,5vw,80px)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}@media(max-width:600px){body{padding:24px 12px}.heading{padding:0 5px 16px}.heading h1{font-size:22px}.heading p{font-size:11px}.edition{font-size:10px}.player{border-radius:12px}.toolbar{padding:10px 10px 12px}.controls{gap:3px}.icon{padding:8px}.time{font-size:11px;margin-left:0}.volume{display:none}.loop{gap:4px;padding:7px}.notes{justify-content:center}.shortcuts{display:none}.start{width:55px;height:55px}.gate-label{font-size:11px}.gate{gap:10px}}@media(max-height:500px) and (orientation:landscape){body{padding:10px}.heading,.notes{display:none}.app{width:min(100%,calc((100dvh - 92px)*1.77))}}
+</style>
+</head>
+<body>
+<svg class="symbols" aria-hidden="true"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5L19 12 8 19Z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5H10V19H7ZM15 5H18V19H15Z"/></symbol>
+<symbol id="i-replay" viewBox="0 0 24 24"><path d="M5 8A8 8 0 1 1 4 15M5 3V8H10"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9H8L13 5V19L8 15H4ZM17 8Q21 12 17 16M20 5Q26 12 20 19"/></symbol>
+<symbol id="i-muted" viewBox="0 0 24 24"><path d="M4 9H8L13 5V19L8 15H4ZM17 9L22 15M22 9L17 15"/></symbol>
+<symbol id="i-loop" viewBox="0 0 24 24"><path d="M4 11V8A3 3 0 0 1 7 5H20L17 2M20 5L17 8M20 13V16A3 3 0 0 1 17 19H4L7 16M4 19L7 22"/></symbol>
+<symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M9 4H4V9M15 4H20V9M4 15V20H9M20 15V20H15"/></symbol>
+<symbol id="i-exit" viewBox="0 0 24 24"><path d="M4 9H9V4M20 9H15V4M9 20V15H4M15 20V15H20"/></symbol>
+</defs></svg>
+<main class="app">
+ <header class="heading"><div><h1>四季</h1><p>星空里的时间</p></div><div class="edition"><span class="dot"></span>春 · 夏 · 秋 · 冬</div></header>
+ <section class="player" id="player" aria-label="四季小猫音乐动画播放器" data-ready="false" data-playing="false" data-ended="false">
+  <div class="screen" id="screen">
+   <iframe class="scene" id="scene" title="黑白小猫在四季之间玩耍" tabindex="-1"></iframe>
+   <div class="gate" id="gate"><button class="start" id="begin" aria-label="开始播放" disabled><svg aria-hidden="true"><use href="#i-play"/></svg></button><span class="gate-label" id="gate-label" role="status">正在准备四季…</span></div>
+  </div>
+  <div class="toolbar">
+   <label class="sr-only" for="timeline">播放进度</label><input class="timeline" id="timeline" type="range" min="0" max="24.033333" step="0.001" value="0" aria-valuetext="0秒，共24秒" disabled>
+   <div class="controls">
+    <button class="icon play" id="play" title="播放（空格）" aria-label="播放" disabled><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+    <button class="icon" id="replay" title="从头播放" aria-label="从头播放" disabled><svg aria-hidden="true"><use href="#i-replay"/></svg></button>
+    <output class="time" aria-label="播放时间"><span id="elapsed">00:00</span><span class="total"> / <span id="duration">00:24</span></span></output>
+    <span class="spacer"></span>
+    <button class="loop" id="loop" aria-label="循环播放" aria-pressed="false" title="循环播放"><svg aria-hidden="true"><use href="#i-loop"/></svg><span>循环</span></button>
+    <button class="icon" id="mute" title="静音（M）" aria-label="静音" aria-pressed="false"><svg aria-hidden="true"><use href="#i-volume"/></svg></button>
+    <label class="sr-only" for="volume">音量</label><input class="volume" id="volume" type="range" min="0" max="1" step="0.01" value="1">
+    <button class="icon" id="fullscreen" title="全屏（F）" aria-label="全屏"><svg aria-hidden="true"><use href="#i-fullscreen"/></svg></button>
+   </div>
+  </div>
+ </section>
+ <footer class="notes"><span class="notice" id="notice" role="status">音乐已内置 · 可离线播放</span><span class="shortcuts">空格 播放 / 暂停　← → 跳转　M 静音　F 全屏</span></footer>
+</main>
+<audio id="music" preload="auto" src="__AUDIO_DATA__"></audio>
+<noscript>请在浏览器中启用 JavaScript，以播放四季小猫动画。</noscript>
+<script id="build-manifest" type="application/json">/*__BUILD_MANIFEST__*/</script>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const player=$('player'),screen=$('screen'),iframe=$('scene'),audio=$('music'),timeline=$('timeline');
+const gate=$('gate'),label=$('gate-label'),notice=$('notice'),play=$('play'),begin=$('begin');
+const state={ready:false,playing:false,wanted:false,ended:false,started:false,scrubbing:false,resume:false,pendingResume:false,loop:false,time:0,raf:0,paintStamp:-Infinity,attempt:0};
+let film,duration=721/30;
+const clamp=t=>Math.max(0,Math.min(duration,Number(t)||0));
+const format=t=>`${Math.floor(t/60).toString().padStart(2,'0')}:${Math.floor(t%60).toString().padStart(2,'0')}`;
+const icon=(button,name)=>button.querySelector('use').setAttribute('href','#i-'+name);
+function fit(){const rect=screen.getBoundingClientRect(),scale=Math.min(rect.width/1020,rect.height/576);iframe.style.transform=`scale(${scale})`;iframe.style.left=(rect.width-1020*scale)/2+'px';iframe.style.top=(rect.height-576*scale)/2+'px';}
+new ResizeObserver(fit).observe(screen);
+function progress(t){state.time=clamp(t);timeline.value=state.time;timeline.style.setProperty('--progress',(state.time/duration*100)+'%');timeline.setAttribute('aria-valuetext',`${state.time.toFixed(1)}秒，共${duration.toFixed(1)}秒`);$('elapsed').textContent=format(state.time);}
+function paint(t){if(!film)return;film.frame(clamp(t));progress(t);}
+function ui(){
+ player.dataset.playing=String(state.playing);player.dataset.ended=String(state.ended);
+ icon(play,state.playing?'pause':'play');play.setAttribute('aria-label',state.playing?'暂停':'播放');play.title=state.playing?'暂停（空格）':'播放（空格）';
+ gate.hidden=state.playing||state.scrubbing;
+ if(state.ready){label.textContent=state.ended?'再看一遍':state.started?'已暂停 · 点击继续':'点击播放 · 带音乐';begin.setAttribute('aria-label',state.ended?'重新播放':state.started?'继续播放':'开始播放');}
+}
+function pause(paintNow=true){
+ state.attempt++;state.wanted=false;state.pendingResume=false;state.playing=false;audio.pause();cancelAnimationFrame(state.raf);state.raf=0;
+ if(paintNow&&state.ready)paint(audio.currentTime);ui();
+}
+function schedule(){cancelAnimationFrame(state.raf);state.paintStamp=-Infinity;state.raf=requestAnimationFrame(tick);}
+function tick(now){
+ if(!state.playing)return;
+ if(audio.ended||audio.currentTime>=duration-.001){finish();return;}
+ if(now-state.paintStamp>=1000/30-.6){paint(audio.currentTime);state.paintStamp=now;}
+ state.raf=requestAnimationFrame(tick);
+}
+function start(){
+ if(!state.ready||state.scrubbing||document.hidden)return;
+ if(state.ended||audio.currentTime>=duration-.02){audio.currentTime=0;state.ended=false;paint(0);}
+ state.started=true;state.wanted=true;state.pendingResume=false;
+ const attempt=++state.attempt;
+ // Called directly inside the click/keyboard event, preserving user activation.
+ const request=audio.play();
+ Promise.resolve(request).then(()=>{
+  if(attempt!==state.attempt||!state.wanted||document.hidden){if(!state.wanted||document.hidden)audio.pause();return;}
+  state.playing=true;paint(audio.currentTime);ui();schedule();notice.textContent='音乐已内置 · 可离线播放';
+ }).catch(error=>{
+  if(attempt!==state.attempt)return;
+  state.wanted=false;state.playing=false;ui();
+  notice.textContent=error.name==='NotAllowedError'?'请点击播放按钮，开启音乐与画面。':'音乐暂未能播放，请用新版 Edge 或 Chrome 重新打开。';
+ });
+}
+function toggle(){if(state.playing||state.wanted)pause();else start();}
+function finish(){
+ if(state.ended)return;
+ const repeat=state.loop&&(state.playing||state.wanted)&&!state.scrubbing&&!document.hidden;
+ pause(false);state.ended=true;paint(duration);ui();
+ if(repeat){state.ended=false;audio.currentTime=0;paint(0);start();}
+}
+function beginSeek(){
+ if(!state.ready||state.scrubbing)return;
+ const resume=state.playing||state.wanted||state.pendingResume;
+ pause(false);state.scrubbing=true;state.resume=resume;state.ended=false;state.started=true;ui();
+}
+function previewSeek(t){
+ if(!state.ready)return;
+ beginSeek();const target=clamp(t);audio.currentTime=target;paint(target);
+}
+function resumeSeek(){
+ if(document.hidden){state.pendingResume=false;state.resume=false;return;}
+ if(state.pendingResume&&!state.scrubbing&&!audio.seeking){state.pendingResume=false;start();}
+}
+function endSeek(){
+ if(!state.scrubbing)return;
+ state.scrubbing=false;state.paintStamp=-Infinity;state.ended=state.time>=duration-.01;
+ state.pendingResume=state.resume&&!state.ended;state.resume=false;ui();resumeSeek();
+}
+function seek(t){previewSeek(t);endSeek();}
+timeline.addEventListener('pointerdown',beginSeek);
+timeline.addEventListener('input',()=>previewSeek(Number(timeline.value)));
+timeline.addEventListener('change',endSeek);
+timeline.addEventListener('blur',endSeek);
+window.addEventListener('pointerup',()=>{if(state.scrubbing)endSeek();});
+window.addEventListener('pointercancel',()=>{if(state.scrubbing)endSeek();});
+audio.addEventListener('seeked',resumeSeek);
+audio.addEventListener('ended',()=>{if(audio.ended||audio.currentTime>=duration-.02)finish();});
+audio.addEventListener('pause',()=>{if(state.playing&&!state.scrubbing&&!audio.ended){state.playing=false;state.wanted=false;cancelAnimationFrame(state.raf);paint(audio.currentTime);ui();}});
+play.addEventListener('click',toggle);begin.addEventListener('click',toggle);
+screen.addEventListener('click',event=>{if(!event.target.closest('button'))toggle();});
+$('replay').addEventListener('click',()=>{pause(false);state.ended=false;audio.currentTime=0;paint(0);start();});
+$('loop').addEventListener('click',()=>{state.loop=!state.loop;$('loop').setAttribute('aria-pressed',String(state.loop));});
+function volumeUI(){const muted=audio.muted||audio.volume===0;icon($('mute'),muted?'muted':'volume');$('mute').setAttribute('aria-pressed',String(muted));$('mute').setAttribute('aria-label',muted?'取消静音':'静音');$('mute').title=muted?'取消静音（M）':'静音（M）';}
+function mute(){if(audio.volume===0){audio.volume=.7;$('volume').value=.7;audio.muted=false;}else audio.muted=!audio.muted;volumeUI();}
+$('mute').addEventListener('click',mute);
+$('volume').addEventListener('input',()=>{audio.volume=Number($('volume').value);audio.muted=audio.volume===0;volumeUI();});
+audio.addEventListener('volumechange',volumeUI);
+async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if(player.requestFullscreen)await player.requestFullscreen();else notice.textContent='当前浏览器不支持网页全屏，可使用浏览器的全屏功能。';}catch{notice.textContent='未能进入全屏，仍可在当前窗口播放。';}}
+$('fullscreen').addEventListener('click',fullscreen);
+document.addEventListener('fullscreenchange',()=>{const full=!!document.fullscreenElement;icon($('fullscreen'),full?'exit':'fullscreen');$('fullscreen').setAttribute('aria-label',full?'退出全屏':'全屏');fit();});
+document.addEventListener('keydown',event=>{
+ if(event.altKey||event.ctrlKey||event.metaKey||event.target.closest('input,button,a,[contenteditable]'))return;
+ if(event.code==='Space'){event.preventDefault();toggle();}
+ else if(event.code==='ArrowLeft'||event.code==='ArrowRight'){event.preventDefault();seek(state.time+(event.code==='ArrowLeft'?-2:2));}
+ else if(event.key.toLowerCase()==='m')mute();
+ else if(event.key.toLowerCase()==='f')fullscreen();
+});
+document.addEventListener('visibilitychange',()=>{
+ if(!document.hidden)return;
+ const active=state.playing||state.wanted||state.pendingResume||state.resume;
+ state.resume=false;state.pendingResume=false;
+ if(active){pause(!state.scrubbing);notice.textContent='已暂停 · 返回后点击继续';}
+});
+window.addEventListener('pagehide',()=>pause(false));
+const audioReady=new Promise((resolve,reject)=>{
+ if(audio.readyState>=1){resolve();return;}
+ audio.addEventListener('loadedmetadata',resolve,{once:true});
+ audio.addEventListener('error',()=>reject(new Error('无法读取内置音乐，请使用新版 Edge 或 Chrome 打开。')),{once:true});
+});
+const sceneReady=new Promise((resolve,reject)=>{
+ iframe.addEventListener('load',async()=>{try{film=iframe.contentWindow.film;if(!film)throw new Error('动画未能初始化。');await film.ready;resolve();}catch(error){reject(error);}},{once:true});
+ iframe.srcdoc=/*__SCENE_DOCUMENT__*/;
+});
+Promise.all([sceneReady,audioReady]).then(()=>{
+ duration=film.duration;timeline.max=String(duration);$('duration').textContent=format(duration);
+ state.ready=true;player.dataset.ready='true';[play,begin,$('replay'),timeline].forEach(el=>el.disabled=false);
+ // A still from the opening spring gives the paused player a useful cover.
+ // Playback itself always starts at zero, including the film's original fade.
+ film.frame(4.37);progress(0);fit();ui();
+}).catch(error=>{player.dataset.ready='error';label.textContent='打开失败';notice.textContent=error.message||'请使用新版 Edge 或 Chrome 打开这个文件。';});
+fit();volumeUI();
+})();
+</script>
+</body>
+</html>

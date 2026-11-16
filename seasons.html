@@ -1,0 +1,41 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1020,height=576">
+<title>四季 · 星空里的时间</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+#scene{position:absolute;inset:0;width:1020px;height:576px;transform-origin:0 0}
+canvas{position:absolute;inset:0;width:1020px;height:576px}
+</style>
+</head>
+<body>
+<div id="scene" aria-label="星空四季时钟">
+<canvas id="galaxy" width="1020" height="576" aria-label="银河背景"></canvas>
+<canvas id="meadow" width="1020" height="576" aria-label="春夏秋冬草坪"></canvas>
+<canvas id="cats" width="1020" height="576" aria-label="黑猫与白猫"></canvas>
+<canvas id="clock" width="1020" height="576" aria-label="金色指针与中心圆环"></canvas>
+<canvas id="weather" width="1020" height="576" aria-label="花粉、扬尘与飘雪"></canvas>
+</div>
+<script type="module">
+import {createStarfield} from './starfield.js';
+import {createCatActors} from './cat-actors.js';
+import {createSeasonScene} from './season-scene.js';
+const scene=document.getElementById('scene');
+const layers=Object.fromEntries(['galaxy','meadow','cats','clock','weather'].map(id=>[id,document.getElementById(id).getContext('2d')]));
+let renderer;
+window.film={
+ duration:721/30,width:1020,height:576,
+ ready:Promise.all([createCatActors(),fetch('references/pointer-every-frame.json').then(r=>r.json())]).then(([cats,pointer])=>{renderer=createSeasonScene(layers,createStarfield(),cats,pointer.samples)}),
+ frame(t){
+  t=Math.max(0,Math.min(24,t));renderer.draw(t);
+  let exposure=t<5/30?.015:.76+.24*Math.min(1,(t-5/30)/.48);
+  if(t>23.1)exposure*=Math.max(0,1-(t-23.1)/.83);
+  if(t>=23.8)exposure*=.065;
+  scene.style.opacity=String(exposure);
+ }
+};
+</script>
+</body>
+</html>

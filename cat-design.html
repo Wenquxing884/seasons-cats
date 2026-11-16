@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440,height=960">
+<title>黑白小猫｜角色模型</title>
+<style>
+  :root{font-family:"Microsoft YaHei UI","Microsoft YaHei",sans-serif;color:#28302f;font-synthesis:none}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:1440px;height:960px;overflow:hidden;background:#edece6}
+  body{background:radial-gradient(ellipse at 12% 0,#faf9f5 0,transparent 42%),#edece6}
+  header{position:absolute;left:56px;right:56px;top:38px;height:95px;border-bottom:1px solid #d7d9d1}
+  .eyebrow{margin:0 0 9px;font-size:12px;letter-spacing:3.2px;font-weight:600;color:#737d75}
+  h1{margin:0;font-weight:600;font-size:34px;letter-spacing:1px;line-height:1.3}
+  .summary{position:absolute;right:0;bottom:27px;margin:0;font-size:14px;color:#707a72;letter-spacing:.3px}
+  main{position:absolute;left:56px;right:56px;top:163px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:316px 316px;gap:23px}
+  .model{position:relative;overflow:hidden;border:1px solid #333b3c;border-radius:18px;background:#252a2b}
+  .model.white{background:#dbe3e3;border-color:#ced8d8}
+  .label{position:absolute;left:24px;right:24px;top:20px;display:flex;align-items:center;gap:9px;z-index:2}
+  .swatch{width:9px;height:9px;border-radius:50%;background:#090c0d;box-shadow:0 0 0 1px #606d6e}
+  .white .swatch{background:#f7f7ed;box-shadow:0 0 0 1px #becac9}
+  .name{font-size:13px;letter-spacing:1px;font-weight:500;color:#bdc6c3}
+  .pose{margin-left:auto;font-size:16px;font-weight:500;color:#d4ddda;letter-spacing:2px}
+  .white .name{color:#56605a}
+  .white .pose{color:#4a5551}
+  canvas{position:absolute;left:0;top:50px;width:426px;height:252px}
+  .baseline{position:absolute;left:32px;right:32px;bottom:24px;height:1px;background:linear-gradient(90deg,transparent,#384140 18%,#384140 82%,transparent)}
+  .white .baseline{background:linear-gradient(90deg,transparent,#c4d1d1 18%,#c4d1d1 82%,transparent)}
+  footer{position:absolute;left:56px;right:56px;top:848px;height:71px;display:flex;align-items:flex-start;justify-content:space-between;border-top:1px solid #d4d8cf;padding-top:22px}
+  .feature-list{display:flex;gap:30px;font-size:13px;color:#68736b;letter-spacing:.5px}
+  .feature-list span:before{content:"";display:inline-block;width:4px;height:4px;border-radius:100%;background:#94a091;margin-right:9px;vertical-align:3px}
+  .source{font-size:12px;color:#899189;letter-spacing:1.2px}
+</style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">四季 · 角色造型</p>
+  <h1>黑白小猫｜角色模型</h1>
+  <p class="summary">大头短腿 · 圆润轮廓 · 细密绒毛</p>
+</header>
+<main>
+  <article class="model" data-name="black" data-pose="stand"><div class="label"><span class="swatch"></span><span class="name">黑猫</span><span class="pose">站立</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+  <article class="model" data-name="black" data-pose="lie"><div class="label"><span class="swatch"></span><span class="name">黑猫</span><span class="pose">趴卧</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+  <article class="model" data-name="black" data-pose="sit"><div class="label"><span class="swatch"></span><span class="name">黑猫</span><span class="pose">坐姿</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+  <article class="model white" data-name="white" data-pose="stand"><div class="label"><span class="swatch"></span><span class="name">白猫</span><span class="pose">站立</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+  <article class="model white" data-name="white" data-pose="lie"><div class="label"><span class="swatch"></span><span class="name">白猫</span><span class="pose">趴卧</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+  <article class="model white" data-name="white" data-pose="sit"><div class="label"><span class="swatch"></span><span class="name">白猫</span><span class="pose">坐姿</span></div><div class="baseline"></div><canvas width="852" height="504"></canvas></article>
+</main>
+<footer><div class="feature-list"><span>统一头身比例</span><span>连续姿态骨架</span><span>毛边与柔和受光</span><span>黑猫银色铃铛</span></div><div class="source">依据六张造型参考 · 代码绘制</div></footer>
+<script type="module">
+import * as model from './cat-model.js';
+const cards=[...document.querySelectorAll('.model')];
+function displayPose(name,posture){
+  if(model.createDisplayPose)return model.createDisplayPose(name,posture);
+  return {name,posture,state:posture,x:0,y:0,scale:1,orientation:1,
+    facing:-1,air:0,jump:0,pitch:0,crouch:0,t:0,action:'hold',moving:false,
+    grounded:true,contactWeight:1,landingImpulse:0,phase:0,
+    rig:{sit:posture==='sit'?1:0,lie:posture==='lie'?1:0},paws:[],contacts:[]};
+}
+function draw(){
+  for(const card of cards){
+    const canvas=card.querySelector('canvas'),ctx=canvas.getContext('2d');
+    ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.scale(2,2);
+    const posture=card.dataset.pose,name=card.dataset.name;
+    const scale=posture==='sit'?3.25:posture==='lie'?4.35:3.8;
+    ctx.save();ctx.translate(213,232);ctx.scale(scale,scale);
+    const shadow=ctx.createRadialGradient(0,0,1,0,0,29);
+    shadow.addColorStop(0,name==='black'?'rgba(5,9,10,.18)':'rgba(62,84,85,.14)');shadow.addColorStop(1,'rgba(62,84,85,0)');
+    ctx.fillStyle=shadow;ctx.beginPath();ctx.ellipse(0,.3,posture==='sit'?23:31,3.4,0,0,Math.PI*2);ctx.fill();
+    model.drawCatModel(ctx,displayPose(name,posture),{fur:true,detail:2});
+    ctx.restore();
+  }
+}
+window.film={width:1440,height:960,duration:1,ready:document.fonts.ready,frame(){draw()}};
+</script>
+</body>
+</html>

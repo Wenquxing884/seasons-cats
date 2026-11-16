@@ -1,0 +1,13 @@
+# Generated standalone player is distributed through Releases.
+/四季小猫-独立播放.html
+/seasons.mp4
+
+# Local production state, caches and dependencies.
+.film/
+node_modules/
+*.log
+
+# Operating-system metadata.
+.DS_Store
+Thumbs.db
+desktop.ini
